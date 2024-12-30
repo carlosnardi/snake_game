@@ -2,21 +2,29 @@ from turtle import Turtle
 
 class NewSnake:
   def __init__(self):
-    self.snake = Turtle()
-    self.snake.shape("square")
-    self.snake.shapesize(stretch_wid=1,stretch_len=2)
-    self.snake.fillcolor("white")
-    # self.snake.tiltangle()
+    initial_position = [(0,0),(-20,0),(-40,0)]
+    self.segments = []
+    for position in initial_position:
+      self.snake = Turtle(shape="square")
+      self.snake.penup()
+      self.snake.color("white")
+      self.snake.goto(position)
+      self.snake.speed('slowest')
+      self.segments.append(self.snake)
 
-  def grow(self, size): #  need to study more
-    self.snake.shapesize(stretch_wid=1,stretch_len=size)
-    
   def move_forward(self):
-    self.snake.forward(10)
-
+    for self.seg in self.segments:
+      self.seg.forward(1)
+      
+  
   def turn_left(self):
-    self.snake.left(90)
+    for self.seg in self.segments:
+      angle = self.snake.heading()
+      self.snake.setheading(angle - 90)
 
   def turn_right(self):
-    self.snake.right(90)
+    for self.seg in self.segments:
+      angle = self.snake.heading()
+      self.snake.setheading(angle + 90)
+    
     
